@@ -1,0 +1,8 @@
+{
+  "name": "globalimage",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite",
+  "id": "737b397e"
+}
