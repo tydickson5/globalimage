@@ -2,6 +2,8 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
 
+//import {LOG_LEVEL, Purchases} from "@revenuecat/purchases-capacitor";
+
 import { IonicVue } from '@ionic/vue';
 
 /* Core CSS required for Ionic components to work properly */
@@ -23,10 +25,24 @@ import '@ionic/vue/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+// Above the createApp() line
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+defineCustomElements(window);
+
 const app = createApp(App)
   .use(IonicVue)
   .use(router);
+
+  /*
+const configure = async () => {
+  await Purchases.setLogLevel({ level: LOG_LEVEL.DEBUG }); // Enable to get debug logs
+  await Purchases.configure({
+    apiKey: "appl_qDgsfqbfDMGlbrUkNQZfqcWKsMY",
+  });
+};
+*/
   
 router.isReady().then(() => {
   app.mount('#app');
+  //configure().then(() => { "RevenueCat SDK configured!" });
 });
