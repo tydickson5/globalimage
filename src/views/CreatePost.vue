@@ -26,7 +26,7 @@
                 <div id="new_image_div">
                     <img id="new_image" src=""><br/><br/>
                 </div><br/>
-                <ion-button @click="submitPost()" expand="block">post</ion-button>
+                <ion-button id="submit_button" @click="submitPost()" expand="block">post</ion-button>
             </div>
             
         </ion-content>
@@ -69,7 +69,7 @@ export default defineComponent({
 
             // Can be set to the src of an image now
             document.getElementById('new_image').src = "data:image/jpg;base64," + image.base64String;
-            document.getElementById('camera_button_text').innerText = "retake image";
+            //document.getElementById('camera_button_text').innerText = "retake image";
             
             this.postImage = image.base64String;
             
@@ -212,6 +212,16 @@ export default defineComponent({
 
 #take_picture_button ion-text{
     margin-left: 5px;
+}
+
+#submit_button{
+    position: fixed;
+    bottom: 20px;
+    width: 95%;
+}
+
+img{
+    border-radius: 10px;
 }
 
 </style>

@@ -8,6 +8,7 @@ export async function makeToast(m){
         duration: 5000,
         position: "top",
         swipeGesture: "vertical",
+        color: "danger",
     });
 
     await toast.present();

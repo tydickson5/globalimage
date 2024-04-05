@@ -11,6 +11,7 @@
             <ion-header collapse="condense">
                 <ion-toolbar>
                     <ion-title size="large">{{ u[1].name }}</ion-title>
+                    <ion-button color="primary" slot="end" router-link="/settings"><ion-icon :icon="cog" size="small"></ion-icon></ion-button>
                     
                 </ion-toolbar>
                 
@@ -30,7 +31,7 @@
                 <ion-card-content>
                     <ion-text>image</ion-text>
                     <ion-text>duration</ion-text>
-                    <ion-text>time untill post</ion-text>
+                    <ion-text>time until post</ion-text>
                 </ion-card-content>
             </ion-card>
             <div v-for="(post, futureposts) in futureposts">

@@ -2,7 +2,7 @@
     <ion-page>
         <ion-header>
             <ion-toolbar>
-            <ion-title>Home</ion-title>
+            <ion-title>home</ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content :fullscreen="true">
@@ -93,7 +93,7 @@ export default defineComponent({
         const post = reactive([]);
 
         async function getPost(userid){
-            var p = await getFuturePosts(userid, 1, true);
+            var p = await getFuturePosts(userid, 1, 3);
             post.push(p);
             console.log(p);
         }

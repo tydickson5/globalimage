@@ -12,10 +12,10 @@
                 <form class="ion-padding" action="">
                     <ion-input color="light" type="email" name ='email' placeholder="email" v-model="inputEmail" :clear-input="true"></ion-input><br/>
                     <ion-input color="light" type="password" placeholder="password" id="inputPassword" v-model="inputPassword" :clear-input="true"></ion-input><br/>
-                    <br/><ion-button color="tertiary" @click="login" expand="block">submit</ion-button>
+                    <br/><ion-button color="primary" @click="login" expand="block">submit</ion-button>
                 </form><br/>
                 <div id="center_text">
-                    <ion-text color="tertiary" router-link="/signup">create account</ion-text>
+                    <ion-text color="primary" router-link="/signup">create account</ion-text>
                 </div>
             </div>
         </ion-content>
@@ -86,16 +86,20 @@ export default defineComponent({
 
 <style scoped>
 
-    #login_form{
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 50%;
-        transform: translateY(-60%);
-    }
+#login_form{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-60%);
+}
 
-    ion-input{
-        --padding-start: 10px;
-    }
+ion-input{
+    --padding-start: 10px;
+}
+
+#center_text{
+    text-align: center;
+}
 
 </style>
