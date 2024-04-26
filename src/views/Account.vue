@@ -6,23 +6,23 @@
         </ion-toolbar>
     </ion-header>
     <ion-content :fullscreen="true">
-        <br/>
         <div v-for="(u, user) in user">
             <ion-header collapse="condense">
                 <ion-toolbar>
                     <ion-title size="large">{{ u[1].name }}</ion-title>
-                    <ion-button color="primary" slot="end" router-link="/settings"><ion-icon :icon="cog" size="small"></ion-icon></ion-button>
+                    <ion-button color="primary" slot="end" router-link="/settings"><ion-icon :icon="cog" size="small" @click="haptic('light')"></ion-icon></ion-button>
                     
                 </ion-toolbar>
                 
             </ion-header>
+            <ion-text id="posts_left">free posts: {{ u[3].posts }}</ion-text>
             
         </div><br/>
         <ion-segment value="future" color="primary" @ionChange="handleEvent()">
-            <ion-segment-button value="future">
+            <ion-segment-button value="future" @click="haptic('light')">
                 <ion-label>future posts</ion-label>
             </ion-segment-button>
-            <ion-segment-button value="old">
+            <ion-segment-button value="old" @click="haptic('light')">
                 <ion-label>old posts</ion-label>
             </ion-segment-button>
         </ion-segment>
@@ -39,6 +39,7 @@
                     <ion-card-content>
                         <img :src="'data:image/jpg;base64,' + post.data[2].image">
                         <ion-text v-if="post.data[5].duration == 1">1 minute</ion-text>
+                        <ion-text v-if="post.data[5].duration != 1">{{ post.data[5].duration }} minutes</ion-text>
                         <ion-text v-if="post.data[6].timetillpost < 60">{{ post.data[6].timetillpost }} minutes</ion-text>
                         <ion-text v-if="post.data[6].timetillpost < 1439 && post.data[6].timetillpost >= 60">{{ Math.floor(post.data[6].timetillpost / 60) }} hours</ion-text>
                         <ion-text v-if="post.data[6].timetillpost >= 1439" >{{ Math.floor(post.data[6].timetillpost / 1440) }} days</ion-text>
@@ -54,7 +55,7 @@
             <ion-card color="primary">
                 <ion-card-content>
                     <ion-text>image</ion-text>
-                    <ion-text>duration</ion-text>
+                    <ion-text>likes</ion-text>
                     <ion-text>time since post</ion-text>
                 </ion-card-content>
             </ion-card>
@@ -62,16 +63,17 @@
                 <ion-card>
                     <ion-card-content>
                         <img :src="'data:image/jpg;base64,' + post.data[2].image">
-                        <ion-text v-if="post.data[5].duration == 1">1 minute</ion-text>
+                        <ion-text>{{post.data[3].likes}} likes</ion-text>
                         <ion-text v-if="post.data[6].timetillpost < 60">{{ post.data[6].timetillpost }} minutes</ion-text>
                         <ion-text v-if="post.data[6].timetillpost < 1439 && post.data[6].timetillpost >= 60">{{ Math.floor(post.data[6].timetillpost / 60) }} hours</ion-text>
                         <ion-text v-if="post.data[6].timetillpost >= 1439" >{{ Math.floor(post.data[6].timetillpost / 1440) }} days</ion-text>
                     </ion-card-content>
                 </ion-card>
-                <ion-infinite-scroll @ion-infinite="ionInfinite2">
-                    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-                </ion-infinite-scroll>
+                
             </div>
+            <ion-infinite-scroll @ion-infinite="ionInfinite2">
+                <ion-infinite-scroll-content></ion-infinite-scroll-content>
+            </ion-infinite-scroll>
         </div>
         
 
@@ -85,6 +87,7 @@ import { defineComponent, reactive } from 'vue';
 import { getUser } from '../httpRequests/signinRequests.js';
 import { getFuturePosts } from '../httpRequests/postRequests.js';
 import { cog, ellipseSharp } from 'ionicons/icons';
+import { makeToast, makeHaptic } from '../scripts/toast.js';
 
 
 export default defineComponent({
@@ -111,6 +114,9 @@ export default defineComponent({
         }
     },
     methods: {
+        haptic(type){
+            makeHaptic(type);
+        }
         
     },
     setup(){
@@ -166,7 +172,7 @@ export default defineComponent({
 
         async function findOPosts(){
             for(let i = 0; i < 10; i++){
-                var p = await getFuturePosts(userid, count, false);
+                var p = await getFuturePosts(userid, count2, false);
                 count2++;
                 if(p.data[0].id == lastid2){
                     moreposts2 = false;
@@ -175,7 +181,7 @@ export default defineComponent({
                 if(moreposts2 != false){
                     oldposts.push(p);
                 }
-                //console.log(p);
+                console.log(p);
             }
         }
 
@@ -245,6 +251,10 @@ ion-segment{
 
 #old_posts{
     display: none;
+}
+
+#posts_left{
+    margin-left: 5%;
 }
 
 </style>

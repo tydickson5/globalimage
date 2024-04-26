@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
 
-//import {LOG_LEVEL, Purchases} from "@revenuecat/purchases-capacitor";
+import {LOG_LEVEL, Purchases} from "@revenuecat/purchases-capacitor";
 
 import { IonicVue } from '@ionic/vue';
 
@@ -33,16 +33,16 @@ const app = createApp(App)
   .use(IonicVue)
   .use(router);
 
-  /*
+
 const configure = async () => {
   await Purchases.setLogLevel({ level: LOG_LEVEL.DEBUG }); // Enable to get debug logs
   await Purchases.configure({
-    apiKey: "appl_qDgsfqbfDMGlbrUkNQZfqcWKsMY",
+    apiKey: "appl_rBFRuPNyQNqsOVfqmvrbzuxiulh",
   });
 };
-*/
+
   
 router.isReady().then(() => {
   app.mount('#app');
-  //configure().then(() => { "RevenueCat SDK configured!" });
+  configure().then(() => { "RevenueCat SDK configured!" });
 });

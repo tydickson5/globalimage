@@ -81,4 +81,22 @@ export async function deleteAccount(id){
     return u.json();
 }
 
+export async function getTime(userid){
+    const url2='https://canvassed.net/timerSet.php';
+    var user = {
+        "userid": userid,
 
+    };
+    var postrequestparams = {
+        "method": "POST",
+        "mode": "cors",
+        "headers": {
+            "Content-Type": "application/json; charset=utf-8",
+        
+        },
+        "body": JSON.stringify(user)
+    }
+    let u = await fetch(url2, postrequestparams);
+    let ur = await u.json();
+    return ur;
+}

@@ -10,12 +10,12 @@
         <ion-content>
             <div id="login_form">
                 <form class="ion-padding" action="">
-                    <ion-text>@<ion-input color="light" type="text" name ='instagram' placeholder="instagram" v-model="inputInstagram" :clear-input="true"></ion-input><br/></ion-text><br/>
-                    <ion-text>@<ion-input color="light" type="text" name ='tiktok' placeholder="tiktok" v-model="inputTiktok" :clear-input="true"></ion-input><br/></ion-text><br/>
-                    <ion-input color="light" type="password" name ='password' placeholder="new password" v-model="inputPassword" :clear-input="true"></ion-input><br/>
+                    <ion-text>@<ion-input color="light" type="text" name ='instagram' placeholder="new instagram" v-model="inputInstagram" :clear-input="true" @click="haptic('light')"></ion-input><br/></ion-text><br/>
+                    <ion-text>@<ion-input color="light" type="text" name ='tiktok' placeholder="new tiktok" v-model="inputTiktok" :clear-input="true" @click="haptic('light')"></ion-input><br/></ion-text><br/>
+                    <ion-input color="light" type="password" name ='password' placeholder="new password" v-model="inputPassword" :clear-input="true" @click="haptic('light')"></ion-input><br/>
                     <br/><ion-button color="primary" @click="update()" expand="block">update</ion-button>
-                    <br/><ion-button color="primary" router-link="/login" expand="block">change account</ion-button>
-                    <br/><ion-button id="present_alert" color="danger" expand="block">delete account</ion-button>
+                    <br/><ion-button color="primary" router-link="/login" expand="block" @click="haptic('light')">change account</ion-button>
+                    <br/><ion-button id="present_alert" color="danger" expand="block" @click="haptic('light')">delete account</ion-button>
                     <ion-alert trigger="present_alert" header="delete account" :buttons="alertButtons"></ion-alert>
                 </form><br/>
             </div>
@@ -37,7 +37,7 @@ import {
     IonAlert
 } from '@ionic/vue';
 import { defineComponent } from 'vue';
-import { makeToast } from '../../scripts/toast.js';
+import { makeToast, makeHaptic } from '../../scripts/toast.js';
 import { updateInstagram, updateTiktok, updatePassword, deleteAccount } from '../../httpRequests/userRequests.js';
 
 
@@ -57,6 +57,7 @@ export default defineComponent({
     },
     methods: {
         async update(){
+            makeHaptic('medium');
 
             var userid = sessionStorage.getItem('userid');
 
@@ -73,8 +74,11 @@ export default defineComponent({
                 console.log(response)
             }
 
-            makeToast('updated');
+            makeToast('updated', 'success');
         },
+        haptic(type){
+            makeHaptic(type);
+        }
     },
     data(){
         return{
@@ -91,16 +95,15 @@ export default defineComponent({
                 text: 'delete',
                 role: 'delete',
                 handler: async () => {
-                    
                     var response = await deleteAccount(userid);
                     console.log(response)
                     if(response.success == true){
                         this.$router.link('/login');
-                        makeToast('account deleted');
+                        makeToast('account deleted', 'success');
                     }
                     else{
                         console.log('error');
-                        makeToast('error');
+                        makeToast('error', 'danger');
                     }
                 }
             },
@@ -108,7 +111,7 @@ export default defineComponent({
                 text: 'cancel',
                 role: 'cancel',
                 handler: () => {
-                    console.log('cancelled');
+                    console.log('cancelled', 'danger');
                 }
             }
         ]

@@ -2,7 +2,6 @@
     <ion-page>
         <ion-header>
             <ion-toolbar collapse="condense">
-                <ion-back-button default-href="pageDefaultBackLink" slot="start"></ion-back-button>
                 <ion-title>login</ion-title>
                 
             </ion-toolbar>

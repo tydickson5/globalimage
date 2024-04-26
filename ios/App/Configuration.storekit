@@ -1,0 +1,100 @@
+{
+  "identifier" : "BCA8A391",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "1.99",
+      "familyShareable" : false,
+      "internalID" : "6498397389",
+      "localizations" : [
+        {
+          "description" : "A one minute post.",
+          "displayName" : "1 minute post",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "296023309a2e72815dfabdefb964713b518bd1e19063a42c046a678c2ffe",
+      "referenceName" : "1minutepost",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "7.99",
+      "familyShareable" : false,
+      "internalID" : "6498397641",
+      "localizations" : [
+        {
+          "description" : "A five minute post.",
+          "displayName" : "5 minute post",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "c22c9adb00d04f5168b2bad73460177bbd69fb9d9cd9262a2b298941f043",
+      "referenceName" : "5minutepost",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6498315413",
+    "_developerTeamID" : "NUC37C5ZL9",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 735009289.523772,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 3,
+    "minor" : 0
+  }
+}
