@@ -115,10 +115,9 @@ export default defineComponent({
 
                 if(ur.success == true){
                     makeToast('success', 'success');
-                    document.getElementById('new_image').setAttribute('src', "");
-                    //document.getElementById('camera_button_text').innerText = "add image";
-                    this.postImage = '';
-                    this.$router.push('/');
+                    //document.getElementById('new_image').setAttribute('src', "");
+                    //this.postImage = '';
+                    //this.$router.push('/');
                 }
                 else if(ur.success == false && ur.reason == "no more free posts"){
                     makeToast('you are out of free posts', 'danger')

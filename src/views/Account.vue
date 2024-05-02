@@ -143,6 +143,7 @@ export default defineComponent({
         async function findFPosts(){
             for(let i = 0; i < 10; i++){
                 var p = await getFuturePosts(userid, count, true);
+                console.log(p);
                 count++;
                 if(p.data[0].id == lastid){
                     moreposts = false;

@@ -12,34 +12,40 @@
             </ion-toolbar>
             </ion-header>
             <br/><br/><br/>
-            <div v-for="(p, postlog) in postlog">
-                <div id="post">
-                    <p v-if="p.data[2].image == ''">no posts</p>
-                    <img v-if="p.data[2].image != ''" :src="'data:image/jpg;base64,' + p.data[2].image">
-                    <br/><br/>
-                    <div id="options_bar">
-                        <ion-text><h1>{{ p.data[1].userdata[1].name }}</h1></ion-text>
-                        <div id="extra_options">
-                            <div id="like_button">
-                                <ion-icon id='main_heart' size="large" :icon="heart" color="light" v-if="p.data[7].liked == false" @click="like(p.data[0].id, p.data[3].likes)"></ion-icon>
-                                <ion-icon size="large" :icon="heart" color="danger" v-if="p.data[7].liked == true"></ion-icon>
-                                <ion-icon id='extra_heart' size="large" :icon="heart" color="danger"></ion-icon>
-                                <ion-text id="likes">{{ p.data[3].likes }}</ion-text>
+            <div v-if="postlog.length < 1">
+                <p id="no_post_p">no posts</p>
+            </div>
+            <div v-show="postlog.length > 0">
+                <div v-for="(p, postlog) in postlog">
+                    <div id="post">
+                        <p v-if="p.data[2].image == ''">no posts</p>
+                        <img v-if="p.data[2].image != ''" :src="'data:image/jpg;base64,' + p.data[2].image">
+                        <br/><br/>
+                        <div id="options_bar">
+                            <ion-text><h1>{{ p.data[1].userdata[1].name }}</h1></ion-text>
+                            <div id="extra_options">
+                                <div id="like_button">
+                                    <ion-icon id='main_heart' size="large" :icon="heart" color="light" v-if="p.data[7].liked == false" @click="like(p.data[0].id, p.data[3].likes)"></ion-icon>
+                                    <ion-icon size="large" :icon="heart" color="danger" v-if="p.data[7].liked == true"></ion-icon>
+                                    <ion-icon id='extra_heart' size="large" :icon="heart" color="danger"></ion-icon>
+                                    <ion-text id="likes">{{ p.data[3].likes }}</ion-text>
+                                </div>
+                                
+                                <div id="socials">
+                                    <ion-button color="primary" @click="openLink(1, p.data[1].userdata[3].instagram)">
+                                        <ion-icon size="small" :icon="logoInstagram"></ion-icon>
+                                    </ion-button>
+                                    <ion-button color="primary" @click="openLink(2, p.data[1].userdata[4].tiktok)">
+                                        <ion-icon size="small" :icon="logoTiktok"></ion-icon>
+                                    </ion-button>
+                                </div>
                             </div>
                             
-                            <div id="socials">
-                                <ion-button color="primary" @click="openLink(1, p.data[1].userdata[3].instagram)">
-                                    <ion-icon size="small" :icon="logoInstagram"></ion-icon>
-                                </ion-button>
-                                <ion-button color="primary" @click="openLink(2, p.data[1].userdata[4].tiktok)">
-                                    <ion-icon size="small" :icon="logoTiktok"></ion-icon>
-                                </ion-button>
-                            </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
+            
             <div id="no_post">
                 <p>login to see posts</p>
             </div>
@@ -117,7 +123,7 @@ export default defineComponent({
         async function getPost(userid, count){
             var p = await getFuturePosts(userid, count, 3);
             
-            
+            console.log(p)
             postlog.push(p);
             
             
@@ -143,10 +149,15 @@ export default defineComponent({
                 var response = await getTime(userid);
                 //console.log(response);
                 if(response.success == true || num == 0){
-                    delay(2000)
-                    postlog.splice(0);
-                    getPost(userid, 1);
-                    num = 1;
+                    console.log(1);
+                    
+                    delay(6000).then(() => postlog.splice(0));
+                    delay(6000).then(() => getPost(userid, 1));
+                    delay(6000).then(() => console.log(2));
+                    num = 1
+                    
+                    
+                    
                 }
                 
             }
@@ -251,6 +262,10 @@ ion-text{
 
 #no_post{
     display: none;
+}
+
+#no_post_p{
+    display: flex;
 }
 
 </style>
