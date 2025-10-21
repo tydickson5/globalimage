@@ -37,7 +37,7 @@ const app = createApp(App)
 const configure = async () => {
   await Purchases.setLogLevel({ level: LOG_LEVEL.DEBUG }); // Enable to get debug logs
   await Purchases.configure({
-    apiKey: "appl_rBFRuPNyQNqsOVfqmvrbzuxiulh",
+    apiKey: "",
   });
 };
 
